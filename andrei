@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muovi la Pallina</title>
+    <style>
+        body {
+            background-color: bianco; 
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #container {
+            position: relative;
+            background-color: grigio;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        #ball {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        button {
+            background-color: orange;
+            color: #ffffff;
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <img id="ball" src="https://tse1.mm.bing.net/th?id=OIP.XvJTVV_p7veBCyvqYj24VAHaH-&pid=Api&P=0&h=180" alt="Pallina">
+    <br>
+    <button onclick="moveBall('up')">↑</button>
+    <br>
+    <button onclick="moveBall('left')">←</button>
+    <button onclick="moveBall('down')">↓</button>
+    <button onclick="moveBall('right')">→</button>
+</div>
+
+<script>
+    var ball = document.getElementById('ball');
+
+    function moveBall(direction) {
+        var step = 10; 
+        var ballRect = ball.getBoundingClientRect();
+        var containerRect = document.getElementById('container').getBoundingClientRect();
+
+        switch (direction) {
+            case 'up':
+                if (ballRect.top - step >= containerRect.top) {
+                    ball.style.top = ballRect.top - step + 'px';
+                }
+                break;
+            case 'left':
+                if (ballRect.left - step >= containerRect.left) {
+                    ball.style.left = ballRect.left - step + 'px';
+                }
+                break;
+            case 'down':
+                if (ballRect.bottom + step <= containerRect.bottom) {
+                    ball.style.top = ballRect.top + step + 'px';
+                }
+                break;
+            case 'right':
+                if (ballRect.right + step <= containerRect.right) {
+                    ball.style.left = ballRect.left + step + 'px';
+                }
+                break;
+        }
+    }
+</script>
+
+</body>
+</html>
